@@ -1,0 +1,278 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>uinapp打包小程序对接企业微信登录 | AxiangBlog</title><meta name="author" content="Axiang"><meta name="copyright" content="Axiang"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="深度学习uinapp3主题介绍 :使用uinapp打包到小程序实现企业微信的登录的搭建配置域名：https:&#x2F;&#x2F;uniapp.xxx.net.cn&#x2F;   首先我们要明白小程序的运行环境和浏览器的运行环境是一样的，它里面经过了webpack打包编译的处理，使用uniapp开发的小程序在h5页面上是没有问题的,但是运行到微信开发者工具中就会出现各种各样的问题,比如路由传参拿不到数据,小程序页面数据，体">
+<meta property="og:type" content="article">
+<meta property="og:title" content="uinapp打包小程序对接企业微信登录">
+<meta property="og:url" content="https://axiang-123.github.io/blog/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0uinapp03/index.html">
+<meta property="og:site_name" content="AxiangBlog">
+<meta property="og:description" content="深度学习uinapp3主题介绍 :使用uinapp打包到小程序实现企业微信的登录的搭建配置域名：https:&#x2F;&#x2F;uniapp.xxx.net.cn&#x2F;   首先我们要明白小程序的运行环境和浏览器的运行环境是一样的，它里面经过了webpack打包编译的处理，使用uniapp开发的小程序在h5页面上是没有问题的,但是运行到微信开发者工具中就会出现各种各样的问题,比如路由传参拿不到数据,小程序页面数据，体">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://axiang-123.github.io/media/top_img.jpg">
+<meta property="article:published_time" content="2023-03-18T07:00:07.000Z">
+<meta property="article:modified_time" content="2023-03-18T08:18:12.284Z">
+<meta property="article:author" content="Axiang">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://axiang-123.github.io/media/top_img.jpg"><link rel="shortcut icon" href="/media/favicon.png"><link rel="canonical" href="https://axiang-123.github.io/blog/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0uinapp03/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"簡"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: true,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'uinapp打包小程序对接企业微信登录',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-03-18 16:18:12'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    document.addEventListener('pjax:complete', detectApple)})(window)</script><meta name="generator" content="Hexo 5.2.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/avatar.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 传送门</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/media/top_img.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">AxiangBlog</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 目录</span><i class="fas fa-chevron-down expand hide"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Gallery/"><i class="fa-fw fas fa-images"></i><span> 图库</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 传送门</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">uinapp打包小程序对接企业微信登录</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-18T07:00:07.000Z" title="发表于 2023-03-18 15:00:07">2023-03-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-18T08:18:12.284Z" title="更新于 2023-03-18 16:18:12">2023-03-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="uinapp打包小程序对接企业微信登录"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="深度学习uinapp3"><a href="#深度学习uinapp3" class="headerlink" title="深度学习uinapp3"></a>深度学习uinapp3</h1><h3 id="主题介绍"><a href="#主题介绍" class="headerlink" title="主题介绍 :"></a>主题介绍 :</h3><p>使用uinapp打包到小程序实现企业微信的登录的搭建<br>配置域名：<a target="_blank" rel="noopener" href="https://uniapp.xxx.net.cn/">https://uniapp.xxx.net.cn/</a> </p>
+<ul>
+<li>首先我们要明白小程序的运行环境和浏览器的运行环境是一样的，它里面经过了webpack打包编译的处理，使用uniapp开发的小程序在h5页面上是没有问题的,但是运行到微信开发者工具中就会出现各种各样的问题,比如路由传参拿不到数据,小程序页面数据，体积过大，这些都需要我们前端开发工程师去进行解决，还有其他一些问题等等。<h3 id="创建Login文件夹"><a href="#创建Login文件夹" class="headerlink" title="创建Login文件夹"></a>创建Login文件夹</h3> 我是使用一个页面两个登录，使用变量来控制它的是走企业还是走账号登录<h3 id="结构搭建"><a href="#结构搭建" class="headerlink" title="结构搭建"></a>结构搭建</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;login&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 登录框登录 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">v-if</span>=<span class="string">&quot;loginFrom&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">image</span> <span class="attr">class</span>=<span class="string">&quot;logo&quot;</span> <span class="attr">src</span>=<span class="string">&quot;xxxx&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;widthFix&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;lx&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">form</span> <span class="attr">bindsubmit</span>=<span class="string">&quot;onSubmit&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;label&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">image</span> <span class="attr">class</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">src</span>=<span class="string">&quot;xxxx&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;widthFix&quot;</span> /&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">input</span> <span class="attr">class</span>=<span class="string">&quot;input&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入账号,账号格式“shan.zhang”&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;username&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;label&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">image</span> <span class="attr">class</span>=<span class="string">&quot;icon&quot;</span> <span class="attr">src</span>=<span class="string">&quot;xxxx&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;widthFix&quot;</span> /&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">input</span> <span class="attr">:password</span>=<span class="string">&quot;defaultType&quot;</span> <span class="attr">class</span>=<span class="string">&quot;input&quot;</span> <span class="attr">placeholder</span>=<span class="string">&quot;请输入密码&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;password&quot;</span> /&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">image</span> <span class="attr">class</span>=<span class="string">&quot;eye&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;defaultType&quot;</span> <span class="attr">src</span>=<span class="string">&quot;xxxx&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;widthFix&quot;</span></span></span><br><span class="line"><span class="tag">            @<span class="attr">click</span>=<span class="string">&quot;eyeStatus&quot;</span> /&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">image</span> <span class="attr">class</span>=<span class="string">&quot;eye&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;!defaultType&quot;</span> <span class="attr">src</span>=<span class="string">&quot;xxxx&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;widthFix&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;eyeStatus&quot;</span> /&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"></span><br><span class="line">        <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;button&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">button</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-sub&quot;</span> <span class="attr">form-type</span>=<span class="string">&quot;submit&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;Submit&quot;</span>&gt;</span></span><br><span class="line">            登录</span><br><span class="line">          <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 获取企业微信用户信息登录 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">view</span> <span class="attr">v-else</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">image</span> <span class="attr">class</span>=<span class="string">&quot;logo&quot;</span> <span class="attr">src</span>=<span class="string">&quot;xxxx&quot;</span> <span class="attr">mode</span>=<span class="string">&quot;widthFix&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">view</span> <span class="attr">class</span>=<span class="string">&quot;login-btn&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-sub&quot;</span> <span class="attr">type</span>=<span class="string">&quot;primary&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;login&quot;</span>&gt;</span></span><br><span class="line">        企业微信登录</span><br><span class="line">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">button</span> <span class="attr">class</span>=<span class="string">&quot;btn btn-def&quot;</span> <span class="attr">type</span>=<span class="string">&quot;default&quot;</span> @<span class="attr">click</span>=<span class="string">&quot;change&quot;</span>&gt;</span></span><br><span class="line">        账号登录</span><br><span class="line">      <span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">view</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    loginFrom: <span class="literal">false</span>, <span class="comment">//后面的都围绕这个变量来进行操作</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure></li>
+</ul>
+<ol>
+<li>在组件创建的阶段判断使用GetSystemInfo函数用于获取当前系统的信息，是否是企业微信登录,uinapp是支持wx的原生的语法的<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">onLoad&#123;</span><br><span class="line">  wx.getSystemInfo(&#123;</span><br><span class="line">      <span class="function"><span class="title">success</span>(<span class="params">res</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(res);</span><br><span class="line">        <span class="keyword">if</span> (res.host &amp;&amp; res.host.env === <span class="string">&#x27;WeChat&#x27;</span>) &#123;</span><br><span class="line">          that.loginFrom = <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="comment">// 获取cookie，如果cookie存在就它直接跳转至首页</span></span><br><span class="line">     wx.getStorageSync(&#123;</span><br><span class="line">      key: <span class="string">&#x27;cookie&#x27;</span>,</span><br><span class="line">      <span class="function"><span class="title">success</span>(<span class="params">res</span>)</span> &#123;</span><br><span class="line">        wx.switchTab(&#123;</span><br><span class="line">          url: <span class="string">&quot;/pages/home/index.vue&quot;</span>,</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>Ps：小程序是没有document,如果我们使用document.cookie去获取cookie的话是会报错的，小程序的document是undefined，undefined后面在加点的话是会报错的，这里需要注意。<h3 id="企业微信登录的逻辑"><a href="#企业微信登录的逻辑" class="headerlink" title="企业微信登录的逻辑"></a>企业微信登录的逻辑</h3><strong>首先要保证你的小程序是和企业是关联的，以及id配置是企业的</strong></li>
+</ul>
+<ol>
+<li>调用 wx.qy.login企业微信开发者文档里面有具体的介绍，这里就不过多的讲<br>使用 wx.qy.login这个原生方法获取到code<br>这里有一个比较坑的点千万不要拿微信小程序的code去尝试，那个code是没有身份的<br>点击微信开发者工具，上面有一个小眼睛 点击一下预览 ，扫码登录，我们在代码打印code这样的话就可以拿到用户的code<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">wx.qy.login(&#123;</span><br><span class="line">    <span class="function"><span class="title">success</span>(<span class="params">res</span>)</span> &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(res.code, <span class="string">&#x27;这是错误的信息&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="请求用户的在企业的信息"><a href="#请求用户的在企业的信息" class="headerlink" title="请求用户的在企业的信息"></a>请求用户的在企业的信息</h3><strong>封装好接口，基于上面code在发一次请求</strong><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">  qyLogin(res.code).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">     <span class="keyword">const</span> &#123; user, roleList, cookie &#125; = res</span><br><span class="line">    <span class="comment">//  这个位置拿到用户在企业的权限的和信息</span></span><br><span class="line">    &#125;).catch(<span class="function">(<span class="params">err</span>) =&gt;</span> &#123;</span><br><span class="line">            wx.showToast(&#123;</span><br><span class="line">              title: <span class="string">&#x27;登录失败，获取企业微信信息失败&#x27;</span>,</span><br><span class="line">              icon: <span class="string">&#x27;none&#x27;</span>,</span><br><span class="line">              duration: <span class="number">5000</span></span><br><span class="line">            &#125;);</span><br><span class="line">            <span class="built_in">console</span>.log(err, <span class="string">&#x27;这是错误的信息&#x27;</span>)</span><br><span class="line">          &#125;).finally(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(err, <span class="string">&#x27;不管成功和失败都会执行&#x27;</span>)</span><br><span class="line">          &#125;);</span><br><span class="line"><span class="string">``</span><span class="string">` </span></span><br><span class="line"><span class="string">**后面存储用户的信息，可以使用本地储存的方式，也可以使用Vuex**</span></span><br><span class="line"><span class="string">### 存储用户信息</span></span><br><span class="line"><span class="string">   `</span><span class="string">``</span>js</span><br><span class="line">      <span class="function"><span class="title">login</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> that = <span class="built_in">this</span></span><br><span class="line">        ..........<span class="comment">//调用原生的api </span></span><br><span class="line">      that.$store.commit(<span class="string">&quot;user/setUserinfo&quot;</span>, &#123; user, roleList &#125;)</span><br><span class="line">       that.$store.commit(<span class="string">&quot;user/setCookie&quot;</span>, cookie);</span><br><span class="line">      &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<ul>
+<li>这个位置为啥不是this，而是that, 因为在里面拿不到this拿不到组件的实例，这里有聊到this的指向的问题<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">非严格模式，this 指向全局对象，严格模式，this 为 undefined。</span><br><span class="line">普通对象 obj 没有 this，里面访问的 this指向 window 对象。</span><br><span class="line">如果一个函数中有this，但是它没有被上一级的对象所调用，那么this指向的就是window</span><br><span class="line">this 永远指向最后调用它的那个对象,适用于非箭头函数的调用</span><br></pre></td></tr></table></figure>
+<h3 id="发送公司的请求"><a href="#发送公司的请求" class="headerlink" title="发送公司的请求"></a>发送公司的请求</h3><strong>跳转至首页</strong><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">wx.request(&#123;</span><br><span class="line">      url: <span class="string">&#x27;http://xxx&#x27;</span>,</span><br><span class="line">      method: <span class="string">&#x27;GET&#x27;</span>,</span><br><span class="line">      header: &#123;</span><br><span class="line">        Cookie: cookie,</span><br><span class="line">        <span class="string">&#x27;Content-Type&#x27;</span>: <span class="string">&#x27;application/json&#x27;</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="function"><span class="title">success</span>(<span class="params">it1</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(it1)</span><br><span class="line">        <span class="comment">// console.log(wx.getStorageSync(&#x27;cookie&#x27;), &#x27;这是cookie&#x27;)</span></span><br><span class="line">        wx.setStorageSync(&#123; <span class="attr">key</span>: <span class="string">&#x27;permission&#x27;</span>, <span class="attr">data</span>: it1.data &#125;);</span><br><span class="line">        uni.switchTab(&#123;</span><br><span class="line">          url: <span class="string">&quot;/pages/home/index&quot;</span>,</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;,</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<div class="note warning modern"><p>以上就是uinapp从0-1搭建小程序的一些总结，后面会继续总结自己，加油，冲冲冲 Peace and love</p>
+</div>
+</li>
+</ul>
+</article><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="/media/top_img.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/media/wechat.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/wechat.jpg" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/blog/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0uinapp02/"><img class="next-cover" src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/top_img.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">uinapp数据的请求</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/avatar.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Axiang</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">3</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/Axiang-123"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:你的邮箱" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">Peace and love</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0uinapp3"><span class="toc-number">1.</span> <span class="toc-text">深度学习uinapp3</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E9%A2%98%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.0.1.</span> <span class="toc-text">主题介绍 :</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BALogin%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="toc-number">1.0.2.</span> <span class="toc-text">创建Login文件夹</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E6%90%AD%E5%BB%BA"><span class="toc-number">1.0.3.</span> <span class="toc-text">结构搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%81%E4%B8%9A%E5%BE%AE%E4%BF%A1%E7%99%BB%E5%BD%95%E7%9A%84%E9%80%BB%E8%BE%91"><span class="toc-number">1.0.4.</span> <span class="toc-text">企业微信登录的逻辑</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E7%94%A8%E6%88%B7%E7%9A%84%E5%9C%A8%E4%BC%81%E4%B8%9A%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-number">1.0.5.</span> <span class="toc-text">请求用户的在企业的信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%91%E9%80%81%E5%85%AC%E5%8F%B8%E7%9A%84%E8%AF%B7%E6%B1%82"><span class="toc-number">1.0.6.</span> <span class="toc-text">发送公司的请求</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/blog/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0uinapp03/" title="uinapp打包小程序对接企业微信登录"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/top_img.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="uinapp打包小程序对接企业微信登录"/></a><div class="content"><a class="title" href="/blog/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0uinapp03/" title="uinapp打包小程序对接企业微信登录">uinapp打包小程序对接企业微信登录</a><time datetime="2023-03-18T07:00:07.000Z" title="发表于 2023-03-18 15:00:07">2023-03-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0uinapp02/" title="uinapp数据的请求"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/top_img.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="uinapp数据的请求"/></a><div class="content"><a class="title" href="/blog/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0uinapp02/" title="uinapp数据的请求">uinapp数据的请求</a><time datetime="2023-03-17T16:10:45.000Z" title="发表于 2023-03-18 00:10:45">2023-03-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/blog/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0uinapp01/" title="uinapp框架的搭建"><img src= "data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs=" data-lazy-src="/media/top_img.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="uinapp框架的搭建"/></a><div class="content"><a class="title" href="/blog/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0uinapp01/" title="uinapp框架的搭建">uinapp框架的搭建</a><time datetime="2023-03-12T07:03:48.000Z" title="发表于 2023-03-12 15:03:48">2023-03-12</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2023 By Axiang</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>if (document.getElementsByClassName('mermaid').length) {
+  if (window.mermaidJsLoad) mermaid.init()
+  else {
+    getScript('https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js').then(() => {
+      window.mermaidJsLoad = true
+      mermaid.initialize({
+        theme: 'default',
+      })
+      true && mermaid.init()
+    })
+  }
+}</script></div><div class="aplayer no-destroy" data-id="7526057833" data-server="tencent" data-type="playlist" data-fixed="true" data-mini="true" data-listFolded="false" data-order="random" data-preload="none" data-autoplay="true" muted></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/click-heart.min.js" async="async" mobile="true"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/gh/metowolf/MetingJS@1.2/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = [
+  'title',
+  '#config-diff',
+  '#body-wrap',
+  '#rightside-config-hide',
+  '#rightside-config-show',
+  '.js-pjax'
+]
+
+if (false) {
+  pjaxSelectors.unshift('meta[property="og:image"]', 'meta[property="og:title"]', 'meta[property="og:url"]')
+}
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.removeEventListener('scroll', window.tocScrollFn)
+  window.removeEventListener('scroll', scrollCollect)
+
+  typeof preloader === 'object' && preloader.initLoading()
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // Analytics
+  if (false) {
+    MtaH5.pgv()
+  }
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+
+  typeof preloader === 'object' && preloader.endLoading()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2d_models/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2d_models/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2d_models/assets/chitose.model.json"},"display":{"position":"left","width":100,"height":150,"hOffset":-10,"vOffset":40},"mobile":{"show":true},"react":{"opacity":0.7},"log":false});</script></body></html>
